@@ -29,4 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          git clone https://github.com/KeysCreator/nextjs-template.git
+          git clone https://github.com/KeysCreator/lud.git
+          cd lud
+          python test.py
