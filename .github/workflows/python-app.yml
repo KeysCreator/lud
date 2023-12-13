@@ -29,4 +29,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          tmate
+          print("hello")
+    shell: python
