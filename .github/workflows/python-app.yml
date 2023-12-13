@@ -28,5 +28,6 @@ jobs:
   log-the-inputs:
     runs-on: python
     steps:
+      - uses: actions/checkout@v2
       - run: |
           print("hello")
