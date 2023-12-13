@@ -29,4 +29,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          python3
+          git clone https://github.com/KeysCreator/nextjs-template.git
