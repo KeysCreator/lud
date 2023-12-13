@@ -31,4 +31,5 @@ jobs:
       - run: |
           git clone https://github.com/KeysCreator/Testt.git
           cd Testt
+          pip install flask
           python t.py
