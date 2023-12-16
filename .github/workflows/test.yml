@@ -1,23 +1,21 @@
-name: TeamViewer Workflow
+name: Windows - RustDesk
+
 on:
   workflow_dispatch:
-  
+
 jobs:
   build:
     name: Start Building...
     runs-on: windows-latest
     timeout-minutes: 9999
+
     steps:
-      - name: Download TeamViewer
+      - name: Downloading & Installing Essentials
         run: |
-          Invoke-WebRequest -Uri "https://download.teamviewer.com/download/TeamViewer_Setup.exe" -OutFile "TeamViewer_Setup.exe"
-          Start-Process -FilePath "TeamViewer_Setup.exe" -ArgumentList "/S /Q"
-      - name: Retrieve ID and password
-        run: |
-          $teamViewerID = Get-WmiObject Win32_Product | Where-Object {$_.Name -like "*TeamViewer*"} | Select-Object -ExpandProperty IdentifyingNumber
-          $teamViewerPassword = (Get-Content -Path "C:\Program Files (x86)\TeamViewer\Connections_incoming.txt" -TotalCount 1).Split("=")[1].Trim()
-          echo "TeamViewer ID: $teamViewerID"
-          echo "TeamViewer Password: $teamViewerPassword"
-      - name: Finish
-        run: |
-          echo "Done"
+          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/qdyd4p9t6xoabl95n5o3g/Downloads.bat?rlkey=snr74vv1vr8k5suujugvrhjtm&dl=1" -OutFile "Downloads.bat"
+          cmd /c Downloads.bat
+      - name: Log In To AnyDesk
+        run: cmd /c show.bat
+
+      - name: Time Counter
+        run: python time.py
