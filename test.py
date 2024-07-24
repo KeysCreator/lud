@@ -4,7 +4,7 @@ from flask_socketio import SocketIO, send
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode='gevent')
 
 @socketio.on('message')
 def handle_message(msg):
@@ -12,4 +12,4 @@ def handle_message(msg):
     send('Hi!')
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, allow_unsafe_werkzeug=True)
+    socketio.run(app, debug=True)
