@@ -1,5 +1,4 @@
 # server.py
-
 from flask import Flask
 from flask_socketio import SocketIO, send
 
@@ -13,4 +12,4 @@ def handle_message(msg):
     send('Hi!')
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=True, allow_unsafe_werkzeug=True)
