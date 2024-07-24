@@ -1,26 +1,16 @@
-import os
-import requests
+# server.py
 
-# Install requests if not already installed
-try:
-    import requests
-except ImportError:
-    print("Requests library not found. Installing...")
-    os.system('pip install requests')
+from flask import Flask
+from flask_socketio import SocketIO, send
 
-# Now that requests is installed, import it again
-import requests
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 
-def send_request():
-    url = "https://discord.com/"
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            print("Request sent successfully to", url)
-        else:
-            print("Failed to send request. Status code:", response.status_code)
-    except Exception as e:
-        print("An error occurred:", str(e))
+@socketio.on('message')
+def handle_message(msg):
+    print(f'Received message: {msg}')
+    send('Hi!')
 
-if __name__ == "__main__":
-    send_request()
+if __name__ == '__main__':
+    socketio.run(app, debug=True)
